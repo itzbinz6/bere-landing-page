@@ -3,17 +3,44 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
-import { Instagram, Twitter, Linkedin, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { StatCounter } from '@/components/ui/stat-counter';
 import { AnimatedSection, AnimatedCard } from '@/components/ui/animated-section';
 import { InteractiveCarousel } from '@/components/ui/interactive-carousel';
+
+// Custom inline SVG icons to bypass deprecated lucide-react brand icons
+const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const heroImgRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Configure your waitlist and social platform handles here!
   const tallyWaitlistUrl = "https://tally.so/r/7R58GR";
+  const instagramUrl = "https://www.instagram.com/berehq";
+  const xUrl = "https://x.com/berehq";
+  const linkedinUrl = "https://www.linkedin.com/company/berehq/";
 
   const { scrollYProgress } = useScroll({
     target: heroImgRef,
@@ -66,7 +93,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center pt-20 pb-20 overflow-hidden bg-stone-950" ref={heroImgRef}>
         <motion.div style={{ y: heroImageY }} className="absolute inset-[-10%] w-[120%] h-[120%] z-0">
           <div className="relative w-full h-full">
-            {/* Our optimized local background video loop */}
+            {/* Our optimized background video loop */}
             <video
               ref={videoRef}
               autoPlay
@@ -76,7 +103,8 @@ export default function Home() {
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover scale-85 opacity-90 transition-opacity duration-1000"
             >
-              <source src="https://ky8b2ydz75mqe00d.public.blob.vercel-storage.com/hero-loop.mp4" />
+              {/* Pointing to public directory path, which you can later change to your Vercel Blob CDN link */}
+              <source src="/videos/hero-loop.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -131,6 +159,29 @@ export default function Home() {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="mb-16 w-full max-w-md px-4 sm:px-0"
           >
+            <div className="shadow-2xl rounded-lg">
+              <a 
+                href={tallyWaitlistUrl}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col sm:flex-row gap-3 w-full p-2 bg-stone-900/80 backdrop-blur-md border border-stone-800 rounded-xl hover:border-orange-500/50 transition-all duration-300 group cursor-pointer text-left"
+              >
+                <div className="flex-grow px-4 py-3 text-stone-400 text-sm flex items-center bg-transparent">
+                  Enter your email to join the waitlist...
+                </div>
+                <span className="px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg text-sm transition-all duration-300 group-hover:bg-orange-700 flex items-center justify-center gap-2 shrink-0">
+                  Join Waitlist
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </a>
+            </div>
+            <p className="text-xs text-stone-300 mt-5 flex items-center justify-center space-x-2 font-medium drop-shadow-sm">
+              <span>Free to join</span>
+              <span className="opacity-50">·</span>
+              <span>No credit card</span>
+              <span className="opacity-50">·</span>
+              <span>Built for African founders</span>
+            </p>
           </motion.div>
 
           <motion.div 
@@ -156,11 +207,11 @@ export default function Home() {
       </section>
 
       {/* Section 3 - The Problem */}
-      <section id="problem" className="py-24 md:py-32 bg-stone-950 text-stone-55">
+      <section id="problem" className="py-24 md:py-32 bg-stone-950 text-stone-50">
         <div className="max-w-7xl mx-auto px-6 md:px-8 text-center">
           <AnimatedSection>
             <div className="text-sm font-semibold tracking-widest text-orange-500 mb-6 uppercase">The Problem</div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-stone-50">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
               Most startups don’t fail because<br className="hidden md:block" /> the idea was bad.
             </h2>
             <p className="text-2xl md:text-3xl text-stone-400 font-light mb-20">
@@ -220,7 +271,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
             <div className="text-sm font-semibold tracking-widest text-orange-600 mb-6 uppercase">The Solution</div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-stone-900">Meet bẹrẹ.</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Meet bẹrẹ.</h2>
             <p className="text-xl text-stone-600">
               The startup intelligence platform that gives every Founder the advantage that only the most well-connected founders currently have.
             </p>
@@ -233,7 +284,7 @@ export default function Home() {
               </div>
               <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                 <div className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-4">Intelligence</div>
-                <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">The bẹrẹ Risk Profile</h3>
+                <h3 className="text-2xl font-display font-bold mb-3">The bẹrẹ Risk Profile</h3>
                 <p className="text-stone-600 leading-relaxed text-[15px]">
                   A guided 10-minute assessment across 7 dimensions of startup health. The Meridian Framework evaluates your financial position, market strength, team capability, regulatory standing, product readiness, operational health, and distribution potential — calibrated specifically for African market conditions.
                 </p>
@@ -245,7 +296,7 @@ export default function Home() {
               </div>
               <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                 <div className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-4">Clarity</div>
-                <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">Understand What’s Holding You Back</h3>
+                <h3 className="text-2xl font-display font-bold mb-3">Understand What’s Holding You Back</h3>
                 <p className="text-stone-600 leading-relaxed text-[15px]">
                   Get a 0–100 score with plain-English explanations of every number. Know exactly which dimension is dragging your performance down and what you need to do about it — before any investor tells you.
                 </p>
@@ -257,7 +308,7 @@ export default function Home() {
               </div>
               <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                 <div className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-4">Action</div>
-                <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">A Roadmap, Not Just a Report</h3>
+                <h3 className="text-2xl font-display font-bold mb-3">A Roadmap, Not Just a Report</h3>
                 <p className="text-stone-600 leading-relaxed text-[15px]">
                   Every bẹrẹ assessment produces a prioritised action plan with specific, time-bound steps ranked by the score improvement they will deliver. Download it as a PDF. Share it directly with investors.
                 </p>
@@ -272,7 +323,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <AnimatedSection className="mb-16">
             <div className="text-sm font-semibold tracking-widest text-orange-600 mb-6 uppercase">The Meridian Framework</div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-stone-900">Seven dimensions of startup intelligence.</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Seven dimensions of startup intelligence.</h2>
             <p className="text-lg text-stone-600 max-w-2xl">
               Traditional VC frameworks cover five domains. The bẹrẹ Meridian Framework goes further.
             </p>
@@ -360,7 +411,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <AnimatedSection className="mb-16">
             <div className="text-sm font-semibold tracking-widest text-orange-600 mb-6 uppercase">The bẹrẹ Intelligence Suite</div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-stone-900">Everything a founder needs. One platform.</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Everything a founder needs. One platform.</h2>
             <p className="text-lg text-stone-600 max-w-2xl">
               The Risk Profile is just the beginning. Seven purpose-built modules. One data foundation.
             </p>
@@ -370,7 +421,6 @@ export default function Home() {
             {[
               { name: 'bẹrẹ Risk Profile', desc: 'Your complete startup health assessment across 7 Meridian dimensions. The foundation of everything.', live: true, img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80' },
               { name: 'Pre-Launch Risk Scan', desc: 'For founders before they have an MVP. Assess what you can control before you build.', live: false, img: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80' },
-              // Note: Swapped the broken photo-1556761175-5973dc0f32d7 URL which was throwing a 404 local error
               { name: 'Investment Readiness Score', desc: 'See your startup through an investor’s eyes.', live: false, img: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80' },
               { name: 'Competitor Benchmarking', desc: 'How do you rank against startups in your sector, country, and stage?', live: false, img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80' },
               { name: 'Execution Playbook', desc: 'A dynamic operational roadmap tailored to your industry and location.', live: false, img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80' },
@@ -395,7 +445,7 @@ export default function Home() {
                       </span>
                     )}
                   </div>
-                  <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">{mod.name}</h3>
+                  <h3 className="text-2xl font-display font-bold mb-3">{mod.name}</h3>
                   <p className="text-stone-600 text-[15px] leading-relaxed">{mod.desc}</p>
                 </div>
               </AnimatedCard>
@@ -419,7 +469,7 @@ export default function Home() {
       <section id="waitlist" className="py-24 md:py-32 bg-stone-100 text-center">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <AnimatedSection>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-stone-900">Be part of the movement.</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Be part of the movement.</h2>
             <p className="text-xl text-stone-600 mb-10">
               bẹrẹ is building the infrastructure African founders have always deserved. Join the waitlist and be among the first founders on the platform.
             </p>
@@ -456,19 +506,34 @@ export default function Home() {
       <footer className="bg-stone-50 border-t border-stone-200 py-12">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center mb-12">
-            <div className="font-display font-bold text-3xl tracking-tighter mb-6 md:mb-0 text-stone-900">bẹrẹ</div>
+            <div className="font-display font-bold text-3xl tracking-tighter mb-6 md:mb-0">bẹrẹ</div>
             <div className="flex space-x-6">
-              <a href="#" className="text-stone-400 hover:text-stone-900 transition-colors">
+              <a 
+                href={instagramUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-stone-400 hover:text-stone-900 transition-colors"
+              >
                 <span className="sr-only">Instagram</span>
-                <Instagram className="w-6 h-6" />
+                <InstagramIcon className="w-6 h-6" />
               </a>
-              <a href="#" className="text-stone-400 hover:text-stone-900 transition-colors">
+              <a 
+                href={xUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-stone-400 hover:text-stone-900 transition-colors"
+              >
                 <span className="sr-only">X</span>
-                <Twitter className="w-6 h-6" />
+                <XIcon className="w-5 h-5 mt-0.5" />
               </a>
-              <a href="#" className="text-stone-400 hover:text-stone-900 transition-colors">
+              <a 
+                href={linkedinUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-stone-400 hover:text-stone-900 transition-colors"
+              >
                 <span className="sr-only">LinkedIn</span>
-                <Linkedin className="w-6 h-6" />
+                <LinkedinIcon className="w-6 h-6" />
               </a>
             </div>
           </div>
