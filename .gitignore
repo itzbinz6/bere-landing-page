@@ -5,3 +5,5 @@ coverage/
 *.log
 .env*
 !.env.example
+README.md
+DATABASE.md
