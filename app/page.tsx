@@ -3,16 +3,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
-import { Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Instagram, Twitter, Linkedin, ArrowUpRight } from 'lucide-react';
 import { StatCounter } from '@/components/ui/stat-counter';
 import { AnimatedSection, AnimatedCard } from '@/components/ui/animated-section';
-import { WaitlistForm } from '@/components/ui/waitlist-form';
 import { InteractiveCarousel } from '@/components/ui/interactive-carousel';
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const heroImgRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const tallyWaitlistUrl = "https://tally.so/r/7R58GR";
 
   const { scrollYProgress } = useScroll({
     target: heroImgRef,
@@ -49,8 +50,14 @@ export default function Home() {
             <a href="#framework" className="hover:text-white transition-colors duration-300">The Framework</a>
             <a href="#modules" className="hover:text-white transition-colors duration-300">Modules</a>
           </div>
-          <a href="#waitlist" className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${scrolled ? 'bg-orange-600 text-white hover:bg-orange-700' : 'bg-white text-stone-900 hover:bg-stone-100'}`}>
+          <a 
+            href={tallyWaitlistUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md flex items-center gap-1.5 ${scrolled ? 'bg-orange-600 text-white hover:bg-orange-700' : 'bg-white text-stone-900 hover:bg-stone-100'}`}
+          >
             Join the Waitlist
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
       </nav>
@@ -69,7 +76,7 @@ export default function Home() {
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover scale-85 opacity-90 transition-opacity duration-1000"
             >
-              <source src="/videos/hero-loop.mp4" type="video/mp4" />
+              <source src="https://ky8b2ydz75mqe00d.public.blob.vercel-storage.com/hero-loop.mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -122,9 +129,8 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
-            className="mb-16 w-full max-w-md"
+            className="mb-16 w-full max-w-md px-4 sm:px-0"
           >
-           
           </motion.div>
 
           <motion.div 
@@ -150,11 +156,11 @@ export default function Home() {
       </section>
 
       {/* Section 3 - The Problem */}
-      <section id="problem" className="py-24 md:py-32 bg-stone-950 text-stone-50">
+      <section id="problem" className="py-24 md:py-32 bg-stone-950 text-stone-55">
         <div className="max-w-7xl mx-auto px-6 md:px-8 text-center">
           <AnimatedSection>
             <div className="text-sm font-semibold tracking-widest text-orange-500 mb-6 uppercase">The Problem</div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-stone-50">
               Most startups don’t fail because<br className="hidden md:block" /> the idea was bad.
             </h2>
             <p className="text-2xl md:text-3xl text-stone-400 font-light mb-20">
@@ -169,7 +175,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/80 to-stone-900/20"></div>
               </div>
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-600 to-orange-400 opacity-50 group-hover:opacity-100 transition-opacity z-10"></div>
-              <div className="relative z-10 p-8 flex flex-col h-full justify-end">
+              <div className="relative z-10 p-8 flex flex-col h-full justify-end text-left">
                 <div className="text-orange-500 font-display font-bold text-2xl mb-4">01</div>
                 <h3 className="text-2xl font-bold mb-4 text-white">No Early Warning</h3>
                 <p className="text-stone-400 leading-relaxed text-lg">
@@ -183,7 +189,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/80 to-stone-900/20"></div>
               </div>
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-600 to-orange-400 opacity-50 group-hover:opacity-100 transition-opacity z-10"></div>
-              <div className="relative z-10 p-8 flex flex-col h-full justify-end">
+              <div className="relative z-10 p-8 flex flex-col h-full justify-end text-left">
                 <div className="text-orange-500 font-display font-bold text-2xl mb-4">02</div>
                 <h3 className="text-2xl font-bold mb-4 text-white">Wrong Tools, Wrong Market</h3>
                 <p className="text-stone-400 leading-relaxed text-lg">
@@ -197,7 +203,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/80 to-stone-900/20"></div>
               </div>
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-600 to-orange-400 opacity-50 group-hover:opacity-100 transition-opacity z-10"></div>
-              <div className="relative z-10 p-8 flex flex-col h-full justify-end">
+              <div className="relative z-10 p-8 flex flex-col h-full justify-end text-left">
                 <div className="text-orange-500 font-display font-bold text-2xl mb-4">03</div>
                 <h3 className="text-2xl font-bold mb-4 text-white">The Knowledge Gap</h3>
                 <p className="text-stone-400 leading-relaxed text-lg">
@@ -214,7 +220,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
             <div className="text-sm font-semibold tracking-widest text-orange-600 mb-6 uppercase">The Solution</div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Meet bẹrẹ.</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-stone-900">Meet bẹrẹ.</h2>
             <p className="text-xl text-stone-600">
               The startup intelligence platform that gives every Founder the advantage that only the most well-connected founders currently have.
             </p>
@@ -225,9 +231,9 @@ export default function Home() {
               <div className="relative h-[45%] w-full shrink-0 overflow-hidden bg-stone-100">
                 <Image src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt="Intelligence" referrerPolicy="no-referrer" />
               </div>
-              <div className="relative z-10 p-8 flex flex-col flex-grow bg-white">
+              <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                 <div className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-4">Intelligence</div>
-                <h3 className="text-2xl font-display font-bold mb-3">The bẹrẹ Risk Profile</h3>
+                <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">The bẹrẹ Risk Profile</h3>
                 <p className="text-stone-600 leading-relaxed text-[15px]">
                   A guided 10-minute assessment across 7 dimensions of startup health. The Meridian Framework evaluates your financial position, market strength, team capability, regulatory standing, product readiness, operational health, and distribution potential — calibrated specifically for African market conditions.
                 </p>
@@ -237,9 +243,9 @@ export default function Home() {
               <div className="relative h-[45%] w-full shrink-0 overflow-hidden bg-stone-100">
                 <Image src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt="Clarity" referrerPolicy="no-referrer" />
               </div>
-              <div className="relative z-10 p-8 flex flex-col flex-grow bg-white">
+              <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                 <div className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-4">Clarity</div>
-                <h3 className="text-2xl font-display font-bold mb-3">Understand What’s Holding You Back</h3>
+                <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">Understand What’s Holding You Back</h3>
                 <p className="text-stone-600 leading-relaxed text-[15px]">
                   Get a 0–100 score with plain-English explanations of every number. Know exactly which dimension is dragging your performance down and what you need to do about it — before any investor tells you.
                 </p>
@@ -249,9 +255,9 @@ export default function Home() {
               <div className="relative h-[45%] w-full shrink-0 overflow-hidden bg-stone-100">
                 <Image src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt="Action" referrerPolicy="no-referrer" />
               </div>
-              <div className="relative z-10 p-8 flex flex-col flex-grow bg-white">
+              <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                 <div className="text-xs font-bold uppercase tracking-wider text-orange-600 mb-4">Action</div>
-                <h3 className="text-2xl font-display font-bold mb-3">A Roadmap, Not Just a Report</h3>
+                <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">A Roadmap, Not Just a Report</h3>
                 <p className="text-stone-600 leading-relaxed text-[15px]">
                   Every bẹrẹ assessment produces a prioritised action plan with specific, time-bound steps ranked by the score improvement they will deliver. Download it as a PDF. Share it directly with investors.
                 </p>
@@ -266,7 +272,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <AnimatedSection className="mb-16">
             <div className="text-sm font-semibold tracking-widest text-orange-600 mb-6 uppercase">The Meridian Framework</div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Seven dimensions of startup intelligence.</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-stone-900">Seven dimensions of startup intelligence.</h2>
             <p className="text-lg text-stone-600 max-w-2xl">
               Traditional VC frameworks cover five domains. The bẹrẹ Meridian Framework goes further.
             </p>
@@ -286,7 +292,7 @@ export default function Home() {
                 <div className="relative h-[45%] w-full shrink-0 overflow-hidden bg-stone-100">
                   <Image src={dim.img} fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt={dim.name} referrerPolicy="no-referrer" />
                 </div>
-                <div className="relative z-10 p-8 flex flex-col flex-grow bg-white">
+                <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                   <div className="text-orange-600 font-display font-bold text-2xl mb-2 transition-transform duration-300 group-hover:translate-x-1">{dim.id}</div>
                   <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">{dim.name}</h3>
                   <p className="text-stone-600 text-[15px] leading-relaxed">{dim.desc}</p>
@@ -301,7 +307,7 @@ export default function Home() {
       <section className="py-24 md:py-32 bg-stone-950 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="flex flex-col-reverse md:flex-row items-center gap-16 lg:gap-24">
-            <div className="w-full md:w-1/2">
+            <div className="w-full md:w-1/2 text-left">
               <AnimatedSection>
                 <div className="text-sm font-semibold tracking-widest text-orange-500 mb-6 uppercase">Why Africa First?</div>
                 <h2 className="font-display text-3xl md:text-5xl font-bold mb-8 leading-tight">
@@ -354,7 +360,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <AnimatedSection className="mb-16">
             <div className="text-sm font-semibold tracking-widest text-orange-600 mb-6 uppercase">The bẹrẹ Intelligence Suite</div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Everything a founder needs. One platform.</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-stone-900">Everything a founder needs. One platform.</h2>
             <p className="text-lg text-stone-600 max-w-2xl">
               The Risk Profile is just the beginning. Seven purpose-built modules. One data foundation.
             </p>
@@ -376,7 +382,7 @@ export default function Home() {
                   <Image src={mod.img} fill className="object-cover transition-transform duration-700 group-hover:scale-105" alt={mod.name} referrerPolicy="no-referrer" />
                 </div>
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-stone-200 to-transparent group-hover:from-orange-400 transition-colors duration-500 z-20"></div>
-                <div className="relative z-10 p-8 flex flex-col flex-grow bg-white">
+                <div className="relative z-10 p-8 flex flex-col flex-grow bg-white text-left">
                   <div className="mb-4 flex justify-between items-start">
                     {mod.live ? (
                       <span className="inline-flex items-center space-x-1.5 bg-green-100 text-green-800 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider shadow-sm">
@@ -389,7 +395,7 @@ export default function Home() {
                       </span>
                     )}
                   </div>
-                  <h3 className="text-2xl font-display font-bold mb-3">{mod.name}</h3>
+                  <h3 className="text-2xl font-display font-bold mb-3 text-stone-900">{mod.name}</h3>
                   <p className="text-stone-600 text-[15px] leading-relaxed">{mod.desc}</p>
                 </div>
               </AnimatedCard>
@@ -413,13 +419,28 @@ export default function Home() {
       <section id="waitlist" className="py-24 md:py-32 bg-stone-100 text-center">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <AnimatedSection>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Be part of the movement.</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-stone-900">Be part of the movement.</h2>
             <p className="text-xl text-stone-600 mb-10">
               bẹrẹ is building the infrastructure African founders have always deserved. Join the waitlist and be among the first founders on the platform.
             </p>
-            <div className="flex justify-center mb-6">
-              <WaitlistForm />
+            
+            <div className="flex justify-center mb-6 max-w-md mx-auto">
+              <a 
+                href={tallyWaitlistUrl}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex flex-col sm:flex-row gap-3 w-full p-2 bg-white border border-stone-200 rounded-xl hover:border-orange-500/50 shadow-md transition-all duration-300 group cursor-pointer text-left"
+              >
+                <div className="flex-grow px-4 py-3 text-stone-400 text-sm flex items-center bg-transparent">
+                  Enter your email to join the waitlist...
+                </div>
+                <span className="px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg text-sm transition-all duration-300 group-hover:bg-orange-700 flex items-center justify-center gap-2 shrink-0">
+                  Join Waitlist
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </a>
             </div>
+            
             <p className="text-sm text-stone-500 flex justify-center items-center gap-2 md:gap-4 flex-wrap">
               <span>Free to join</span>
               <span className="hidden md:inline">·</span>
@@ -435,7 +456,7 @@ export default function Home() {
       <footer className="bg-stone-50 border-t border-stone-200 py-12">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center mb-12">
-            <div className="font-display font-bold text-3xl tracking-tighter mb-6 md:mb-0">bẹrẹ</div>
+            <div className="font-display font-bold text-3xl tracking-tighter mb-6 md:mb-0 text-stone-900">bẹrẹ</div>
             <div className="flex space-x-6">
               <a href="#" className="text-stone-400 hover:text-stone-900 transition-colors">
                 <span className="sr-only">Instagram</span>
