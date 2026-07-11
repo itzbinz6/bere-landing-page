@@ -103,8 +103,9 @@ export default function Home() {
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover scale-85 opacity-90 transition-opacity duration-1000"
             >
-              {/* Pointing to public directory path, which you can later change to your Vercel Blob CDN link */}
-              <source src="/videos/hero-loop.mp4" type="video/mp4" />
+              {
+              }
+              <source src="https://ky8b2ydz75mqe00d.public.blob.vercel-storage.com/hero-loop.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
@@ -159,29 +160,6 @@ export default function Home() {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="mb-16 w-full max-w-md px-4 sm:px-0"
           >
-            <div className="shadow-2xl rounded-lg">
-              <a 
-                href={tallyWaitlistUrl}
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex flex-col sm:flex-row gap-3 w-full p-2 bg-stone-900/80 backdrop-blur-md border border-stone-800 rounded-xl hover:border-orange-500/50 transition-all duration-300 group cursor-pointer text-left"
-              >
-                <div className="flex-grow px-4 py-3 text-stone-400 text-sm flex items-center bg-transparent">
-                  Enter your email to join the waitlist...
-                </div>
-                <span className="px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg text-sm transition-all duration-300 group-hover:bg-orange-700 flex items-center justify-center gap-2 shrink-0">
-                  Join Waitlist
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </a>
-            </div>
-            <p className="text-xs text-stone-300 mt-5 flex items-center justify-center space-x-2 font-medium drop-shadow-sm">
-              <span>Free to join</span>
-              <span className="opacity-50">·</span>
-              <span>No credit card</span>
-              <span className="opacity-50">·</span>
-              <span>Built for African founders</span>
-            </p>
           </motion.div>
 
           <motion.div 
